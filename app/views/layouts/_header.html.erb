@@ -5,13 +5,12 @@
     </h1>
     <div class="btn-group dropdown menu-button">
       <button class="btn dropdown-toggle background-dark" type="button" id="menu-button" data-toggle="dropdown"
-                                                      aria-haspopup="true" aria-expanded="false">
+                                                          aria-haspopup="true" aria-expanded="false">
         <%= render 'layouts/hamburger-icon' %>
 	    </button>
-      <ul class="dropdown-menu background-dark dropdown-menu-right" aria-labelledby="menu-button">
-        <li>a</li>
-        <li>a</li>
-        <li>a</li>
+      <ul class="dropdown-menu dropdown-menu-right background-dark" aria-labelledby="menu-button">
+        <li><%= link_to "Log in", '#' %></li>
+        <li><%= link_to "Sign up", signup_path %></li>
       </ul>
     </div>
   </div>
