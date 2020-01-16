@@ -25,4 +25,5 @@ class UserTest < ActiveSupport::TestCase
     @user.password = "     "
     assert_not @user.valid?
   end
+  
 end
