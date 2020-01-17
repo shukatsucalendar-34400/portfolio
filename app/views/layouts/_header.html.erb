@@ -9,8 +9,14 @@
         <%= render 'layouts/hamburger-icon' %>
 	    </button>
       <ul class="dropdown-menu dropdown-menu-right background-dark" aria-labelledby="menu-button">
-        <li><%= link_to "Log in", root_path %></li>
-        <li><%= link_to "Sign up", signup_path %></li>
+        <% if logged_in? %>
+          <li><%= link_to "パスワードの変更", edit_user_path(current_user) %></li>
+          <li class="divider"></li>
+          <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "ログイン", root_path %></li>
+          <li><%= link_to "アカウント登録", signup_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>
