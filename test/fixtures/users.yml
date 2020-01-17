@@ -1,31 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  name: MyString
-  email: 
-  generate: MyString
-  model: MyString
-  User: MyString
-  name: MyString
-  email: MyString
-  password_digest: MyString
-  remember_digest: MyString
-  admin: false
-  activation_digest: MyString
-  activated: false
-  activated_at: 2020-01-15 22:44:51
-
-two:
-  name: MyString
-  email: 
-  generate: MyString
-  model: MyString
-  User: MyString
-  name: MyString
-  email: MyString
-  password_digest: MyString
-  remember_digest: MyString
-  admin: false
-  activation_digest: MyString
-  activated: false
-  activated_at: 2020-01-15 22:44:51
+  name:  "example"
+  email: "example@example.com"
+  password_digest: <%= User.digest('password') %>
+  admin: true
+  activated: true
+  activated_at: <%= Time.zone.now %>

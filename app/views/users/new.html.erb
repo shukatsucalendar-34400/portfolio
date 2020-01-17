@@ -1,10 +1,11 @@
-<% provide(:button_text, 'アカウント作成') %>
+<% provide(:button_text, 'アカウント登録') %>
 <% provide(:url, signup_path) %>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <div class="card login-card">
-      <h1 id="title">アカウント作成</h1>
+      <h1 id="title">アカウント登録</h1>
       <%= render 'form' %>
+      <p>アカウントをお持ちの場合 <%= link_to "ログインする", root_path %></p>
     </div>
   </div>
 </div>
