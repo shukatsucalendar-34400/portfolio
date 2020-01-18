@@ -7,9 +7,12 @@ class SessionsController < ApplicationController
     if !@user
       flash.now[:danger] = 'アカウントが見つかりません'
       render 'new'
+    elsif !@user.activated?
+      flash.now[:danger] = 'アカウントが有効化されていません. 登録したメールを確認してください'
+      render 'new'
     elsif !@user.authenticate(params[:session][:password])
       flash.now[:danger] = 'パスワードが正しくありません'
-      render 'new'        
+      render 'new'
     else
       log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)

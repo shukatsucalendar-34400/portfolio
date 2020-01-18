@@ -1,0 +1,5 @@
+<%= @user.name %> 様
+
+就活カレンダーへのご登録ありがとうございます。以下のリンクからアカウントを有効化してください。
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
