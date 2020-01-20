@@ -8,8 +8,8 @@
         <%= f.email_field :email, class: 'form-control' %>
         
         <%= f.label :password, "パスワード" %>
-        <%#= link_to "(forgot password)", new_password_reset_path %>
         <%= f.password_field :password, class: 'form-control' %>
+      <p>パスワードをお忘れの場合は <%= link_to "パスワードをリセットする", new_password_reset_path %></p>
         
         <%= f.label :remember_me, class: "checkbox inline" do %>
           <%= f.check_box :remember_me %>
