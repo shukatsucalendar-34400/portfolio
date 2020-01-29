@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    setup_calendar
+    params[:current_month] ? @current_month = Time.zone.parse(params[:current_month]) : setup_calendar
   end
   
   def index
