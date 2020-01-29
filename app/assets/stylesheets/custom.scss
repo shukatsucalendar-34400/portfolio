@@ -88,3 +88,28 @@ body {
 .checkbox span{
   margin-left: 20px;
 }
+
+/* calendar */
+table{
+  table-layout: fixed;
+}
+
+thead{
+  font-size: 1.4em;
+}
+
+td{
+  height: 60px;
+}
+
+.current{
+  color: black;
+}
+
+.other{
+  color: gray;
+}
+
+.today{
+  background-color: lightblue;
+}

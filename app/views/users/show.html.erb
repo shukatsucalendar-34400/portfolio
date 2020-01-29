@@ -1,3 +1,28 @@
-<% provide(:button_text, 'アカウント作成') %>
 <div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <h2 class="col text-center">
+      <button type="button" class="btn btn"><span class="glyphicon glyphicon-chevron-left"></span></button>
+      <span><%= current_month.year %>年<%= current_month.month %>月</span>
+      <button type="button" class="btn"><span class="glyphicon glyphicon-chevron-right"></span></button>
+    </h2>
+    <table class="table">
+     <thead class="thead-lignt">
+        <tr>
+          <% [ "月", "火", "水", "木", "金", "土", "日" ].each do |wday| %>
+            <th><%= wday %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <% set_today %>
+      <% day_cell = first_day(current_month) %>
+      <% 6.times do %>
+        <tr>
+          <% 7.times do %>
+            <td class="<%= day_cell_class(day_cell) %>"><%= day_cell.day %></td>
+            <% day_cell = day_cell.tomorrow %>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>

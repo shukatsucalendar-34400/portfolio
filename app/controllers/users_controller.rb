@@ -1,14 +1,17 @@
 class UsersController < ApplicationController
+  include CalendarHelper
+
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :show]
   before_action :correct_user, only: [:index, :edit, :update, :destroy, :show]
   before_action :admin_user, only: [:index]
-
+  
   def new
     @user = User.new
   end
   
   def show
     @user = User.find(params[:id])
+    setup_calendar
   end
   
   def index
