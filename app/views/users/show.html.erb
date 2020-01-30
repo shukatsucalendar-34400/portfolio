@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="col-md-10 col-md-offset-1">
+  <%= render partial: 'sidebar', locals: {current_page: "calendar"} %>
+  <div class="col-md-10">
     <h2 class="col text-center">
       <%= link_to "", user_path(@user, current_month: current_month.prev_month.to_s), class:"btn glyphicon glyphicon-chevron-left" %>
       <span><%= current_month.year %>年<%= current_month.month %>月</span>
@@ -18,7 +19,9 @@
       <% 6.times do %>
         <tr>
           <% 7.times do %>
-            <td class="<%= day_cell_class(day_cell) %>"><%= day_cell.day %></td>
+            <td class="<%= day_cell_class(day_cell) %>">
+              <div class="cell"><%= day_cell.day %></div>
+            </td>
             <% day_cell = day_cell.tomorrow %>
           <% end %>
         </tr>

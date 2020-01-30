@@ -98,7 +98,9 @@ thead{
   font-size: 1.4em;
 }
 
-td{
+.cell{
+  min-height: 60px;
+  height: auto !important;
   height: 60px;
 }
 
@@ -107,9 +109,19 @@ td{
 }
 
 .other{
-  color: gray;
+  color: lightgray;
 }
 
 .today{
   background-color: lightblue;
 }
+
+.sidebar{
+  padding-top: 10px;
+}
+
+.side-business{
+  padding-top: 30px;
+}
+
+
