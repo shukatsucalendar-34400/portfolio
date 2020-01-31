@@ -1,0 +1,8 @@
+<div class="col-md-10">
+  <% if @user.businesses.any? %>
+  <h2 class="col text-center">企業管理</h2>
+      <div class="businesses">
+        <%= render @businesses %>
+      </div>
+  <% end %>
+</div>

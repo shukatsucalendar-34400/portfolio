@@ -10,7 +10,9 @@
 	    </button>
       <ul class="dropdown-menu dropdown-menu-right background-dark" aria-labelledby="menu-button">
         <% if logged_in? %>
-          <!--<li><%= link_to "パスワードの変更", edit_user_path(current_user) %></li>-->
+          <li><%= link_to "カレンダー", user_path(@user, current_page: "calendar", current_month: params[:current_month]) %></li>
+          <li><%= link_to "企業管理", user_path(@user, current_page: "business", current_month: params[:current_month]) %></li>
+          <li class="divider"></li>
           <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "ログイン", root_path %></li>

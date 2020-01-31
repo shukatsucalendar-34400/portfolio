@@ -11,7 +11,18 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    params[:current_month] ? @current_month = Time.zone.parse(params[:current_month]) : setup_calendar
+    @businesses = @user.businesses
+    @business = @user.businesses.build
+    if params[:current_page] == "business"
+      # business
+    else
+      # calendar
+      begin
+        params[:current_month] ? @current_month = Time.zone.parse(params[:current_month]) : setup_calendar
+      rescue
+        setup_calendar
+      end
+    end
   end
   
   def index
@@ -33,14 +44,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
-    end
-
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "ログインしてください"
-        redirect_to root_url
-      end
     end
     
     def correct_user

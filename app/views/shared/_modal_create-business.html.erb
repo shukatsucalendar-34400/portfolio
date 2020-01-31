@@ -1,0 +1,36 @@
+<div class="modal fade" id="businessModal" tabindex="-1" role="dialog" aria-labelledby="businessModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>企業を追加</h4>
+      </div>
+      <%= form_for(@business, url: businesses_path) do |f| %>
+        <div class="modal-body">
+          <%= render 'shared/error_messages', object: f.object %>
+
+          <%= f.label :name, "企業名(必須):" %>
+          <%= f.text_field :name, class: 'form-control' %>
+          
+          <%= f.label :web_site, "ウェブページ URL:" %>
+          <%= f.text_field :web_site, class: 'form-control' %>
+          
+          <%= f.label :my_page, "マイページ URL:" %>
+          <%= f.text_field :my_page, class: 'form-control' %>
+          
+          <%= f.label :address, "所在地:" %>
+          <%= f.text_field :address, class: 'form-control' %>
+          
+          <%= f.label :details, "企業情報:" %>
+          <%= f.text_area :details, class: 'form-control' %>
+          
+          <%= f.label :memo, "メモ:" %>
+          <%= f.text_area :memo, class: 'form-control' %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          <%= f.submit "企業を追加", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

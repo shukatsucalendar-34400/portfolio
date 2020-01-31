@@ -1,0 +1,14 @@
+<div id="business-<%= business.id %>" class="col-md-4 business">
+  <div class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <%= link_to business.name, business, class: " pull-left business-name" %>
+      <span class="pull-right">
+        <span class="business-web_site"><%= link_to "", link_not_nil(business.web_site), class: "glyphicon glyphicon-home", title: "企業ページ" %></span>
+        <span class="business-my_page"><%= link_to "", link_not_nil(business.my_page), class: "glyphicon glyphicon-user", title: "マイページ" %></span>
+      </span>
+    </div>
+    <div class="panel-body">
+      aaaaaa
+    </div>
+  </div>
+</div>

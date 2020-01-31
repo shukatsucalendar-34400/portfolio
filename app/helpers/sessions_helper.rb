@@ -39,6 +39,15 @@ module SessionsHelper
     session[:forwarding_url] = request.original_url if request.get?
   end
   
+  def redirect_referer_or(default)
+    redirect_to(session[:referer_url] || default)
+    session.delete(:referer_url)
+  end
+
+  def store_referer
+    session[:referer_url] = request.referer
+  end
+  
   def remember(user)
     user.remember
     cookies.permanent.signed[:user_id] = user.id
