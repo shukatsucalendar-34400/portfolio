@@ -45,7 +45,7 @@ module SessionsHelper
   end
 
   def store_referer
-    session[:referer_url] = request.referer
+    session[:referer_url] = request.referer if request.get? && request.referer != request.original_url
   end
   
   def remember(user)

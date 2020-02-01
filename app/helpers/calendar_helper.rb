@@ -3,6 +3,7 @@ module CalendarHelper
   def setup_calendar
     set_today
     @current_month = @today.beginning_of_month
+    session[:current_month] = @current_month
   end
   
   def current_month

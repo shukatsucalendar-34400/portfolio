@@ -18,7 +18,14 @@ class UsersController < ApplicationController
     else
       # calendar
       begin
-        params[:current_month] ? @current_month = Time.zone.parse(params[:current_month]) : setup_calendar
+        if params[:current_month] 
+          @current_month = Time.zone.parse(params[:current_month])
+          session[:current_month] = params[:current_month]
+        elsif session[:current_month]
+          @current_month = Time.zone.parse(session[:current_month])
+        else
+          setup_calendar
+        end
       rescue
         setup_calendar
       end

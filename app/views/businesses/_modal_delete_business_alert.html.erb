@@ -1,0 +1,13 @@
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4><%= @business.name %>を削除します</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+        <%= link_to "削除", @business, class:"btn btn-danger", method: :delete %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="text-center"><%= @business.name %></h3>
+      <%= link_to "戻る", session[:referer_url], class:"btn btn-secondary glyphicon glyphicon-chevron-left" %>
+    </div>
+    <div class="col-md-6">
+      <%= form_for(@business, html: { class: "form-horizontal" }) do |f| %>
+        <div class="panel-body">
+          <%= render 'shared/error_messages', object: f.object %>
+          
+          <%= f.label :name, "企業名(必須):" %>
+          <%= f.text_field :name, class: 'form-control', value: @business.name %>
+          
+          <%= f.label :web_site, "ウェブページ URL:" %>
+          <div class="form-inline">
+            <%= f.text_field :web_site, class: "form-control", vallue: @business.web_site %>
+            <%= f.button '移動', type: :submit, class: "btn btn-primary form-control", name: "submit_url", value: "web_site", title: "企業ページ（このタブで開かれます）" %>
+          </div>
+          
+          <%= f.label :my_page, "マイページ URL:" %>
+          <div class="form-inline">
+            <%= f.text_field :my_page, class: 'form-control', value: @business.my_page %>
+            <%= f.button '移動', type: :submit, class: "btn btn-primary", name: "submit_url", value: "my_page", title: "マイページ（このタブで開かれます）"  %>
+          </div>
+          
+          <%= f.label :address, "所在地:" %>
+          <%= f.text_field :address, class: 'form-control', value: @business.address %>
+          
+          <%= f.label :details, "企業情報:" %>
+          <%= f.text_area :details, rows: 10, class: 'form-control', value: @business.details %>
+          
+          <%= f.label :memo, "メモ:" %>
+          <%= f.text_area :memo, rows: 15, class: 'form-control', value: @business.memo %>
+        </div>
+        <div class="panel-footer clearfix">
+          <div class="pull-left">
+            <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#deleteModal">削除</button>
+          </div>
+          <div class="pull-right">
+            <%= link_to "戻る", session[:referer_url], class:"btn btn-secondary glyphicon glyphicon-chevron-left" %>
+            <%= f.submit "更新", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class=" col-md-6">
+    </div>
+  </div>
+</div>
+<%= render 'businesses/modal_delete_business_alert' %>
