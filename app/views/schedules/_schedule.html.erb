@@ -1,0 +1,23 @@
+<% if !schedule.id.nil? %>
+  <div id="schedule-<%= schedule.id %>" class="schedule">
+    <div class="panel <%= class_status(schedule.status) %>">
+      <div class="panel-heading clearfix">
+        <%= link_to schedule.name, edit_schedule_path(schedule), class: "pull-left schedule-name" %>
+        <span class="pull-right">
+          状況: <%= text_status(schedule.status) %>
+        </span>
+      </div>
+      <div class="panel-body">
+        <div class="schedule-date">
+          <%= schedule_date(schedule) %>
+        </div>
+        <div class="schedule-deadline">
+          <%= schedule_deadline(schedule) %>
+        </div>
+        <div class="schedule-selection">
+          <%= schedule_selection(schedule) %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,9 +1,9 @@
 <div class="col-md-10">
-  <h2 class="col text-center">
+  <h3 class="col text-center">
     <%= link_to "", user_path(@user, current_month: current_month.prev_month.to_s), class:"btn glyphicon glyphicon-chevron-left" %>
     <span><%= current_month.year %>年<%= current_month.month %>月</span>
     <%= link_to "", user_path(@user, current_month: current_month.next_month.to_s), class:"btn glyphicon glyphicon-chevron-right" %>
-  </h2>
+  </h3>
   <table class="table">
    <thead class="thead-lignt">
       <tr>

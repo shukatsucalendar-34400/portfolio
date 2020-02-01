@@ -6,12 +6,14 @@ class BusinessesController < ApplicationController
   def create
     @business = current_user.businesses.build(business_params)
     flash[:danger] = '不正な値です.' unless @business.save
-    redirect_referer_or(current_user)
+    redirect_referer_or('#')
   end
   
   def edit
     @user = current_user
     @business = current_user.businesses.find_by(id: params[:id])
+    @schedules = @business.schedules
+    @schedule = @business.schedules.build
   end
 
   def update
