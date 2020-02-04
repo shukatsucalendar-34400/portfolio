@@ -2,7 +2,8 @@ class CreateSchedules < ActiveRecord::Migration[5.1]
   def change
     create_table :schedules do |t|
       t.string :name
-      t.references :business
+      t.references :user, foreign_key: true
+      t.references :business, foreign_key: true
       t.integer :status, default: 2
       t.datetime :first_date
       t.datetime :last_date
@@ -16,8 +17,8 @@ class CreateSchedules < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :schedules, [:business_id, :first_date, :last_date]
-    add_index :schedules, [:business_id, :deadline_date]
-    add_index :schedules, [:business_id, :selection_date]
+    add_index :schedules, [:user_id, :first_date, :last_date]
+    add_index :schedules, [:user_id, :status, :deadline_date]
+    add_index :schedules, [:user_id, :status, :selection_date]
   end
 end

@@ -1,0 +1,9 @@
+<% if !select_business.id.nil? %>
+  <div id="select_business-<%= select_business.id %>" class="col-md-4 business">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div><%= select_business.name %></div>
+      </div>
+    </div>
+  </div>
+<% end %>

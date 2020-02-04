@@ -8,21 +8,36 @@
    <thead class="thead-lignt">
       <tr>
         <% [ "月", "火", "水", "木", "金", "土", "日" ].each do |wday| %>
-          <th><%= wday %></th>
+          <th class="thead-header"><%= wday %></th>
         <% end %>
       </tr>
     </thead>
     <% set_today %>
-    <% day_cell = first_day(current_month) %>
-    <% 6.times do %>
+    <% 6.times do |cell_row| %>
       <tr>
-        <% 7.times do %>
-          <td class="<%= day_cell_class(day_cell) %>">
-            <div class="cell"><%= day_cell.day %></div>
+        <% 7.times do |cell_col| %>
+          <% cell_day = @first_day_of_month.since((cell_row * 7 + cell_col).days) %>
+          <td class="<%= cell_day_class(cell_day) %>">
+            <div class="cell cell_header"><%= cell_day.day %></div>
           </td>
-          <% day_cell = day_cell.tomorrow %>
         <% end %>
       </tr>
+      <% cell_row_length(cell_row).times do |child_cell| %>
+        <tr class="none-border">
+          <% cell_col = 0 %>
+          <% while cell_col < 7 %>
+            <% cell_day = cell_row * 7 + cell_col %>
+            <td colspan="<%= @schedule_ids[cell_day][child_cell]&.[](:length) || '1' %>"
+                class="none-border none-padding">
+              <span class="<%= cell_class(@schedule_ids[cell_day][child_cell]&.[](:status)) %>">
+                <%= @schedule_ids[cell_day][child_cell]&.[](:business) || '' %>
+                <%= @schedule_ids[cell_day][child_cell]&.[](:name) || '' %>
+              </span>
+            </td>
+            <% cell_col += @schedule_ids[cell_day][child_cell]&.[](:length) || 1 %>
+          <% end %>
+        </tr>
+      <% end %>
     <% end %>
   </table>
 </div>

@@ -30,6 +30,7 @@ end
 business = user.businesses.first
 today = Time.zone.now
 business.schedules.create!(name:              'schedule_1',
+                           user_id:           business.user_id,
                            first_date:        today.ago(10.days),
                            last_date:         today.ago(3.days),
                            deadline:          true,
@@ -40,6 +41,7 @@ business.schedules.create!(name:              'schedule_1',
                            selection_all_day: true,
                            status:            0)
 business.schedules.create!(name:              'schedule_2',
+                           user_id:           business.user_id,
                            first_date:        today.ago(10.days),
                            last_date:         today.ago(3.days),
                            deadline:          true,
@@ -56,6 +58,7 @@ business.schedules.create!(name:              'schedule_2',
   
   status = i % 3
   business.schedules.create!(name:       schedule_name,
+                             user_id:    1,
                              first_date: first_date,
                              last_date:  last_date,
                              status:     status)

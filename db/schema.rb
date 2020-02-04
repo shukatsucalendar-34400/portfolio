@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20200201134842) do
 
   create_table "schedules", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
     t.integer "business_id"
     t.integer "status", default: 2
     t.datetime "first_date"
@@ -40,10 +41,11 @@ ActiveRecord::Schema.define(version: 20200201134842) do
     t.boolean "selection_all_day", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["business_id", "deadline_date"], name: "index_schedules_on_business_id_and_deadline_date"
-    t.index ["business_id", "first_date", "last_date"], name: "index_schedules_on_business_id_and_first_date_and_last_date"
-    t.index ["business_id", "selection_date"], name: "index_schedules_on_business_id_and_selection_date"
     t.index ["business_id"], name: "index_schedules_on_business_id"
+    t.index ["user_id", "first_date", "last_date"], name: "index_schedules_on_user_id_and_first_date_and_last_date"
+    t.index ["user_id", "status", "deadline_date"], name: "index_schedules_on_user_id_and_status_and_deadline_date"
+    t.index ["user_id", "status", "selection_date"], name: "index_schedules_on_user_id_and_status_and_selection_date"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

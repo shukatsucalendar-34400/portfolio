@@ -1,0 +1,20 @@
+<nav class="col-md-2 hidden-sm hidden-xs sidebar">
+  <button type="button" class="btn btn-success glyphicon glyphicon-plus sidebar-creates" data-toggle="modal" data-target="#scheduleModal">
+    予定を追加
+  </button>
+  <button type="button" class="btn btn-success glyphicon glyphicon-plus sidebar-creates" data-toggle="modal" data-target="#businessModal">
+    企業を追加
+  </button>
+
+  <ul class="nav nav-pills nav-stacked side-business">
+    <li role="presentation" class="<%= 'active' if yield(:sidebar_active) == 'calendar' %>">
+      <%= link_to "カレンダー", user_path(@user, current_month: params[:current_month]) %>
+    </li>
+    <li role="presentation" class="<%= 'active' if yield(:sidebar_active) == 'businesses' %>">
+      <%= link_to "企業管理", businesses_path %>
+    </li>
+  </ul>
+</nav>
+
+<%= render 'businesses/modal_create-business' %>
+<%= render 'schedules/modal_create-schedule' %>

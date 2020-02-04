@@ -94,14 +94,9 @@ table{
   table-layout: fixed;
 }
 
-thead{
-  font-size: 1.4em;
-}
-
-.cell{
-  min-height: 60px;
-  height: auto !important;
-  height: 60px;
+.thead-header{
+  font-size: 1em;
+  text-align: center;
 }
 
 .current{
@@ -112,8 +107,37 @@ thead{
   color: lightgray;
 }
 
-.today{
-  background-color: lightblue;
+.cell_header{
+  font-size: 4px;
+  text-align: center;
+}
+
+.none-border{
+  border: none!important;  
+  min-height: 10px!important;}
+
+.none-padding{
+  padding: 0px!important;  
+}
+
+.cell{
+  width: 100%;
+  margin: none!important;
+}
+
+.my_label{
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  padding: none 7px;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
 }
 
 /* sidebar */
@@ -142,3 +166,4 @@ thead{
 .business-my_page{
   padding-left: 10px;
 }
+

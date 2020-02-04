@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="text-center"><%= @business.name %></h3>
-      <%= link_to "戻る", session[:referer_url], class:"btn btn-secondary glyphicon glyphicon-chevron-left" %>
+      <%= link_to "戻る", businesses_path, class:"btn btn-secondary glyphicon glyphicon-chevron-left" %>
     </div>
     <div class="col-md-6">
       <%= form_for(@business, html: { class: "form-horizontal" }) do |f| %>
@@ -10,42 +10,44 @@
           <%= render 'shared/error_messages', object: f.object %>
           
           <%= f.label :name, "企業名(必須):" %>
-          <%= f.text_field :name, class: 'form-control', value: @business.name %>
+          <%= f.text_field :name, class: 'form-control', value: @business.name, placeholder: "企業名（必須）" %>
           
-          <%= f.label :web_site, "ウェブページ URL:" %>
+          <%= f.label :web_site, "企業ページ URL:" %>
           <div class="form-inline">
-            <%= f.text_field :web_site, class: "form-control", vallue: @business.web_site %>
+            <%= f.text_field :web_site, class: "form-control", vallue: @business.web_site, placeholder: "企業ページ" %>
             <%= f.button '移動', type: :submit, class: "btn btn-primary form-control", name: "submit_url", value: "web_site", title: "企業ページ（このタブで開かれます）" %>
           </div>
           
           <%= f.label :my_page, "マイページ URL:" %>
           <div class="form-inline">
-            <%= f.text_field :my_page, class: 'form-control', value: @business.my_page %>
+            <%= f.text_field :my_page, class: 'form-control', value: @business.my_page, placeholder: "マイページ" %>
             <%= f.button '移動', type: :submit, class: "btn btn-primary form-control", name: "submit_url", value: "my_page", title: "マイページ（このタブで開かれます）"  %>
           </div>
           
           <%= f.label :address, "所在地:" %>
-          <%= f.text_field :address, class: 'form-control', value: @business.address %>
+          <%= f.text_field :address, class: 'form-control', value: @business.address, placeholder: "所在地" %>
           
           <%= f.label :details, "企業情報:" %>
-          <%= f.text_area :details, rows: 10, class: 'form-control', value: @business.details %>
+          <%= f.text_area :details, rows: 10, class: 'form-control', value: @business.details, placeholder: "企業情報" %>
           
           <%= f.label :memo, "メモ:" %>
-          <%= f.text_area :memo, rows: 15, class: 'form-control', value: @business.memo %>
+          <%= f.text_area :memo, rows: 15, class: 'form-control', value: @business.memo, placeholder: "メモ" %>
         </div>
         <div class="panel-footer clearfix">
           <div class="pull-left">
             <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#deleteModal">削除</button>
           </div>
           <div class="pull-right">
-            <%= link_to "戻る", session[:referer_url], class:"btn btn-secondary glyphicon glyphicon-chevron-left" %>
+            <%= link_to "戻る", businesses_path, class:"btn btn-secondary glyphicon glyphicon-chevron-left" %>
             <%= f.submit "更新", class: "btn btn-primary" %>
           </div>
         </div>
       <% end %>
     </div>
-    <div class=" col-md-6">
-      <%= render @schedules %>
+    <div class="col-md-6">
+      <div class="panel-body">
+        <%= render @schedules %>
+      </div>
     </div>
   </div>
 </div>

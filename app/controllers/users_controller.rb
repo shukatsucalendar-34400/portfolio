@@ -13,21 +13,52 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @businesses = @user.businesses
     @business = @user.businesses.build
-    if params[:current_page] == "business"
-      # business
-    else
-      # calendar
-      begin
-        if params[:current_month] 
-          @current_month = Time.zone.parse(params[:current_month])
-          session[:current_month] = params[:current_month]
-        elsif session[:current_month]
-          @current_month = Time.zone.parse(session[:current_month])
+    @schedule = @user.schedules.build
+    begin
+      if params[:current_month] 
+        @current_month = Time.zone.parse(params[:current_month])
+        session[:current_month] = params[:current_month]
+      elsif session[:current_month]
+        @current_month = Time.zone.parse(session[:current_month])
+      else
+        @current_month = @today.beginning_of_month
+      end
+    rescue
+    end
+    setup_calendar
+    last_day_of_month = @first_day_of_month.since(6.weeks)
+    schedules = Schedule.includes(:user, :business).where(user_id: @user.id) \
+                                                   .where("(first_date BETWEEN ? AND ?) \
+                                                           OR (last_date BETWEEN ? AND ?) \
+                                                           OR ((first_date < ?) AND (last_date > ?))", \
+                                                           @first_day_of_month, last_day_of_month, @first_day_of_month, last_day_of_month, @first_day_of_month, last_day_of_month)\
+                                                   .order(:first_date)
+    @schedule_ids = Array.new(42){ Array.new() }
+    schedules.each do |schedule|
+      set_date_from = ([ schedule.first_date, @first_day_of_month].max.to_date - @first_day_of_month.to_date).to_i
+      if schedule.last_date.nil?
+        set_date_to   = set_date_from
+      else
+        set_date_to = ([ schedule.last_date,  last_day_of_month - 1 ].min.to_date - @first_day_of_month.to_date).to_i
+      end
+      row = safety_transpose(@schedule_ids[set_date_from..set_date_to]).find_index{ |v| !v.compact.present? } \
+            || safety_transpose(@schedule_ids[set_date_from..set_date_to]).length + 1
+      business = schedule.business&.name
+      @schedule_ids[set_date_from][row] = { id:       schedule.id, 
+                                            length:   [(set_date_to - set_date_from + 1), 7 - set_date_from % 7].min, 
+                                            name:     schedule.name, 
+                                            business: business, 
+                                            status:   schedule.status }
+      ((set_date_from + 1)..set_date_to).each do |date|
+        if date % 7 == 0
+          @schedule_ids[date][row] = { id:       schedule.id, 
+                                       length:   [(set_date_to - date + 1), 7].min, 
+                                       name:     schedule.name, 
+                                       business: business, 
+                                       status:   schedule.status }
         else
-          setup_calendar
+          @schedule_ids[date][row] = { id: schedule.id }
         end
-      rescue
-        setup_calendar
       end
     end
   end

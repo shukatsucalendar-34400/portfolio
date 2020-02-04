@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :businesses,          only: [:create, :edit, :update, :destroy]  
-  resources :schedules,           only: [:create, :edit, :update, :destroy]  
+  resources :businesses,          only: [:create, :edit, :update, :index, :destroy]  
+  resources :schedules,           only: [:create, :edit, :update, :destroy] 
+  
+  post 'ajax_select_business', to: 'schedules#ajax_select_business', as: 'ajax_select_business'
 end

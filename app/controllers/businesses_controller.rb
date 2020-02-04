@@ -1,7 +1,7 @@
 class BusinessesController < ApplicationController
-  before_action :logged_in_user, only: [:create, :edit, :destroy]
-  before_action :store_referer,  only: [:create, :edit]
-  before_action :correct_owner,  only: [:update, :destroy]
+  before_action :logged_in_user, only: [:create, :edit, :index, :destroy]
+  before_action :store_referer,  only: [:create]
+  before_action :correct_owner,  only: [:edit, :update, :destroy]
 
   def create
     @business = current_user.businesses.build(business_params)
@@ -11,7 +11,6 @@ class BusinessesController < ApplicationController
   
   def edit
     @user = current_user
-    @business = current_user.businesses.find_by(id: params[:id])
     @schedules = @business.schedules
     @schedule = @business.schedules.build
   end
@@ -26,10 +25,17 @@ class BusinessesController < ApplicationController
       redirect_to edit_business_path(@business)
     end
   end
-
+  
+  def index
+    @user = current_user
+    @businesses = @user.businesses
+    @business = @user.businesses.build
+    @schedule = @user.schedules.build
+  end
+  
   def destroy
     @business.destroy
-    redirect_referer_or(current_user)
+    redirect_to businesses_path
   end
 
   private

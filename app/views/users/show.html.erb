@@ -1,8 +1,5 @@
+<% provide :sidebar_active, 'calendar' %>
 <div class="row">
-  <%= render 'sidebar' %>
-  <% if params[:current_page] == "business" %>
-    <%= render 'businesses' %>
-  <% elsif %>
-    <%= render 'calendar' %>
-  <% end %>
+  <%= render 'shared/sidebar' %>
+  <%= render 'calendar' %>
 </div>
