@@ -23,7 +23,7 @@ user.businesses.create!(name:     '就活カレンダー',
                         details:  'Calendar for job hunting',
                         memo:     'Made by rails')
 50.times do
-  business_name = Faker::Lorem.name
+  business_name = Faker::Name.name
   user.businesses.create!(name: business_name)
 end
 
@@ -52,7 +52,7 @@ business.schedules.create!(name:              'schedule_2',
                            selection_all_day: false,
                            status:            0)
 10.times do |i|
-  schedule_name = Faker::Lorem.name
+  schedule_name = Faker::Name.name
   first_date = today.ago((3*i).days)
   last_date = first_date.since(7.days)
   

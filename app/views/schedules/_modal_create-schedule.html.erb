@@ -4,111 +4,121 @@
       <div class="modal-header">
         <h4>予定を追加</h4>
       </div>
-      <%= form_for(@schedule, url: schedules_path) do |f| %>
-        <div class="modal-body">
-          <%= render 'shared/error_messages', object: f.object %>
-          
-          <div class="form-group row">
-            <%= f.label :name, "予定(必須):", class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <%= f.text_field :name, class: "form-control", placeholder:"予定(必須)" %>
+      <% if defined?(@schedule) %>
+        <%= form_for(@schedule, url: schedules_path) do |f| %>
+          <div class="modal-body">
+            <%= render 'shared/error_messages', object: f.object %>
+            
+            <div class="form-group row">
+              <%= f.label :name, "予定(必須):", class: "col-sm-2 control-label" %>
+              <div class="col-sm-10">
+                <%= f.text_field :name, class: "form-control", placeholder:"予定(必須)" %>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <%= f.label :business_id, "企業:", class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <div id="select_business_id"><%= f.text_field :business_id, class: "form-control hidden", placeholder:"企業" %></div>
-              <div id="select_business_name"></div>
-              <button type="button" class="btn btn-success glyphicon glyphicon-chevron-down"  data-toggle="collapse" data-target="#businessCollapse" aria-expanded="false" aria-controls="businessCollapse">
-                企業を選択
-              </button>
-              <div class="collapse" id="businessCollapse">
-                <div class="card card-body">
-                  <% @businesses.each do |business| %>
-                    <button><%= link_to business.name, ajax_select_business_path(params: { id: business.id }), method: :post, remote: true %></button>
-                  <% end %>
+            <div class="form-group row">
+              <%= f.label :business_id, "企業:", class: "col-sm-2 control-label" %>
+              <div class="col-sm-10">
+                <div id="select_business_id"><%= f.text_field :business_id, class: "form-control hidden", placeholder:"企業" %></div>
+                <div id="select_business_name"></div>
+                <button type="button" class="btn btn-success glyphicon glyphicon-chevron-down"  data-toggle="collapse" data-target="#businessCollapse" aria-expanded="false" aria-controls="businessCollapse">
+                  企業を選択
+                </button>
+                <div class="collapse" id="businessCollapse">
+                  <div class="card card-body">
+                    <% if defined?(@businesses) %>
+                      <% @businesses.each do |business| %>
+                        <% if business != @business %>
+                          <button>
+                            <%= link_to business.name, ajax_select_business_path(params: { id: business.id }), method: :post, remote: true %>
+                          </button>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div class="form-group row">
-            <%= f.label :status, "状況:", class: "col-sm-2 control-label" %>
-            <div class="col-sm-10">
-              <div class="radio-inline">
-                <%= f.radio_button :status, 0 %>
-                <label><%= text_status(0) %></label>
+            
+            <div class="form-group row">
+              <%= f.label :status, "状況:", class: "col-sm-2 control-label" %>
+              <div class="col-sm-10">
+                <div class="radio-inline">
+                  <%= f.radio_button :status, 0 %>
+                  <label><%= text_status(0) %></label>
+                </div>
+                <div class="radio-inline">
+                  <%= f.radio_button :status, 1 %>
+                  <label><%= text_status(1) %></label>
+                </div>
+                <div class="radio-inline">
+                  <%= f.radio_button :status, 2, checked: true %>
+                  <label><%= text_status(2) %></label>
+                </div>
               </div>
-              <div class="radio-inline">
-                <%= f.radio_button :status, 1 %>
-                <label><%= text_status(1) %></label>
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <%= f.label :first_day, "予定日(必須):" %>
               </div>
-              <div class="radio-inline">
-                <%= f.radio_button :status, 2, checked: true %>
-                <label><%= text_status(2) %></label>
+              <div class="col-sm-8">
+                <%= f.datetime_select :first_date, class: 'form-control', value: Time.zone.now %>
+                <%= f.datetime_select :last_date,  class: 'form-control', value: Time.zone.now %>
+              </div>
+              <!--
+              <div class="col-sm-2">
+                <%= f.check_box :all_day %>
+                <%= f.label :all_day, ":終日" %>
+              </div>
+              -->
+            </div>
+            <!--
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <%= f.label :deadline, "締切日:" %>
+              </div>
+              <div class="col-sm-10">
+                <%= f.check_box :deadline %>
+                <%= f.label :deadline, ":締切" %>
               </div>
             </div>
+            <div class="form-group row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <%= f.datetime_field :deadline_date, class: 'form-control' %>
+              </div>
+              <div class="col-sm-2">
+                <%= f.check_box :deadline_all_day %>
+                <%= f.label :deadline_all_day, ":終日" %>
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <%= f.label :selection, "選考日:" %>
+              </div>
+              <div class="col-sm-10">
+                <%= f.check_box :selection %>
+                <%= f.label :selection, ":選考" %>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <%= f.datetime_field :selection_date, class: 'form-control' %>
+              </div>
+              <div class="col-sm-2">
+                <%= f.check_box :selection_all_day %>
+                <%= f.label :selection_all_day, ":終日" %>
+              </div>
+            </div>
+            -->
+            
           </div>
-          
-          <div class="form-group row">
-            <div class="col-sm-2">
-              <%= f.label :first_day, "予定日(必須):" %>
-            </div>
-            <div class="col-sm-8">
-              <%= f.datetime_field :first_date, class: 'form-control' %>
-              <%= f.label :last_day, "~" %>
-              <%= f.datetime_field :last_date,  class: 'form-control' %>
-            </div>
-            <div class="col-sm-2">
-              <%= f.check_box :all_day %>
-              <%= f.label :all_day, ":終日" %>
-            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            <%= f.submit "予定を追加", class: "btn btn-primary" %>
           </div>
-          
-          <div class="form-group row">
-            <div class="col-sm-2">
-              <%= f.label :deadline, "締切日:" %>
-            </div>
-            <div class="col-sm-10">
-              <%= f.check_box :deadline %>
-              <%= f.label :deadline, ":締切" %>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-8 col-sm-offset-2">
-              <%= f.datetime_field :deadline_date, class: 'form-control' %>
-            </div>
-            <div class="col-sm-2">
-              <%= f.check_box :deadline_all_day %>
-              <%= f.label :deadline_all_day, ":終日" %>
-            </div>
-          </div>
-          
-          <div class="form-group row">
-            <div class="col-sm-2">
-              <%= f.label :selection, "選考日:" %>
-            </div>
-            <div class="col-sm-10">
-              <%= f.check_box :selection %>
-              <%= f.label :selection, ":選考" %>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-8 col-sm-offset-2">
-              <%= f.datetime_field :selection_date, class: 'form-control' %>
-            </div>
-            <div class="col-sm-2">
-              <%= f.check_box :selection_all_day %>
-              <%= f.label :selection_all_day, ":終日" %>
-            </div>
-          </div>
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit "予定を追加", class: "btn btn-primary" %>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

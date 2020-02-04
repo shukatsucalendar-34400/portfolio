@@ -2,11 +2,11 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
-        <h4><%= @current_business.name %>を削除します</h4>
+        <h4><%= @schedule.name %>を削除します</h4>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-        <%= link_to "削除", @current_business, class:"btn btn-danger", method: :delete %>
+        <%= link_to "削除", @schedule, class:"btn btn-danger", method: :delete %>
       </div>
     </div>
   </div>

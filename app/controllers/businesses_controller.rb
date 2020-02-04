@@ -11,18 +11,19 @@ class BusinessesController < ApplicationController
   
   def edit
     @user = current_user
-    @schedules = @business.schedules
-    @schedule = @business.schedules.build
+    @businesses = @user.businesses
+    @schedules = @current_business.schedules
+    @schedule = @current_business.schedules.build
   end
 
   def update
-    flash[:danger] = '不正な値です.' unless @business.update_attributes(business_params)
+    flash[:danger] = '不正な値です.' unless @current_business.update_attributes(business_params)
     if params[:submit_url] == "my_page"
       redirect_to (business_params[:my_page] || current_user)
     elsif params[:submit_url] == "web_site"
       redirect_to (business_params[:web_site] || current_user)
     else
-      redirect_to edit_business_path(@business)
+      redirect_to edit_business_path(@current_business)
     end
   end
   
@@ -34,7 +35,7 @@ class BusinessesController < ApplicationController
   end
   
   def destroy
-    @business.destroy
+    @current_business.destroy
     redirect_to businesses_path
   end
 
@@ -45,7 +46,7 @@ class BusinessesController < ApplicationController
     end
     
     def correct_owner
-      @business = current_user.businesses.find_by(id: params[:id])
-      redirect_to current_user if @business.nil?
+      @current_business = current_user.businesses.find_by(id: params[:id])
+      redirect_to current_user if @current_business.nil?
     end
 end

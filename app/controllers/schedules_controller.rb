@@ -11,16 +11,17 @@ class SchedulesController < ApplicationController
   
   def edit
     @user = current_user
+    @businesses = @user.businesses
   end
 
   def update
-    flash[:danger] = '不正な値です.' unless @schedule.update_attributes(business_params)
-    redirect_to edit_business_path(@business)
+    flash[:danger] = '不正な値です.' unless @schedule.update_attributes(schedule_params)
+    redirect_to edit_business_path(@schedule)
   end
   
   def destroy
     @schedule.destroy
-    redirect_to edit_business_path(@business)
+    redirect_to root_path
   end
   
   def ajax_select_business

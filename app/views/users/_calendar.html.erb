@@ -29,10 +29,12 @@
             <% cell_day = cell_row * 7 + cell_col %>
             <td colspan="<%= @schedule_ids[cell_day][child_cell]&.[](:length) || '1' %>"
                 class="none-border none-padding">
-              <span class="<%= cell_class(@schedule_ids[cell_day][child_cell]&.[](:status)) %>">
-                <%= @schedule_ids[cell_day][child_cell]&.[](:business) || '' %>
-                <%= @schedule_ids[cell_day][child_cell]&.[](:name) || '' %>
-              </span>
+              <%= link_to edit_schedule_path(@schedule_ids[cell_day][child_cell]&.[](:id).to_i) do %>
+                <span class="<%= cell_class(@schedule_ids[cell_day][child_cell]&.[](:status)) %>">
+                  <%= @schedule_ids[cell_day][child_cell]&.[](:name) || '' %>
+                  <%= @schedule_ids[cell_day][child_cell]&.[](:business) || '' %>
+                </span>
+              <% end %>
             </td>
             <% cell_col += @schedule_ids[cell_day][child_cell]&.[](:length) || 1 %>
           <% end %>

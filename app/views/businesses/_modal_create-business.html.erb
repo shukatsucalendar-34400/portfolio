@@ -4,32 +4,34 @@
       <div class="modal-header">
         <h4>企業を追加</h4>
       </div>
-      <%= form_for(@business, url: businesses_path) do |f| %>
-        <div class="modal-body">
-          <%= render 'shared/error_messages', object: f.object %>
+      <% if defined?(@business) %>
+        <%= form_for(@business, url: businesses_path) do |f| %>
+          <div class="modal-body">
+            <%= render 'shared/error_messages', object: f.object %>
 
-          <%= f.label :name, "企業名(必須):" %>
-          <%= f.text_field :name, class: 'form-control', placeholder: "企業名(必須)" %>
-          
-          <%= f.label :web_site, "ウェブページ URL:" %>
-          <%= f.text_field :web_site, class: 'form-control', placeholder: "ウェブページ" %>
-          
-          <%= f.label :my_page, "マイページ URL:" %>
-          <%= f.text_field :my_page, class: 'form-control', placeholder: "マイページ" %>
-          
-          <%= f.label :address, "所在地:" %>
-          <%= f.text_field :address, class: 'form-control', placeholder: "所在地" %>
-          
-          <%= f.label :details, "企業情報:" %>
-          <%= f.text_area :details, rows: 3, class: 'form-control', placeholder: "企業情報" %>
-          
-          <%= f.label :memo, "メモ:" %>
-          <%= f.text_area :memo, rows: 3, class: 'form-control', placeholder: "メモ" %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-          <%= f.submit "企業を追加", class: "btn btn-primary" %>
-        </div>
+            <%= f.label :name, "企業名(必須):" %>
+            <%= f.text_field :name, class: 'form-control', placeholder: "企業名(必須)" %>
+            
+            <%= f.label :web_site, "ウェブページ URL:" %>
+            <%= f.text_field :web_site, class: 'form-control', placeholder: "ウェブページ" %>
+            
+            <%= f.label :my_page, "マイページ URL:" %>
+            <%= f.text_field :my_page, class: 'form-control', placeholder: "マイページ" %>
+            
+            <%= f.label :address, "所在地:" %>
+            <%= f.text_field :address, class: 'form-control', placeholder: "所在地" %>
+            
+            <%= f.label :details, "企業情報:" %>
+            <%= f.text_area :details, rows: 3, class: 'form-control', placeholder: "企業情報" %>
+            
+            <%= f.label :memo, "メモ:" %>
+            <%= f.text_area :memo, rows: 3, class: 'form-control', placeholder: "メモ" %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            <%= f.submit "企業を追加", class: "btn btn-primary" %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

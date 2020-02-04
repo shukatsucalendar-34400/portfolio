@@ -10,6 +10,15 @@
 	    </button>
       <ul class="dropdown-menu dropdown-menu-right background-dark" aria-labelledby="menu-button">
         <% if logged_in? %>
+          <% if defined?(@schedule) && defined?(@business) %>
+            <li><a  data-toggle="modal" data-target="#scheduleModal">
+              予定を追加
+            </a></li>
+            <li><a  data-toggle="modal" data-target="#businessModal">
+              企業を追加
+            </a></li>
+            <li class="divider"></li>
+          <% end %>
           <li><%= link_to "カレンダー", user_path(current_user, current_month: params[:current_month]) %></li>
           <li><%= link_to "企業管理", businesses_path %></li>
           <li class="divider"></li>
@@ -22,3 +31,6 @@
     </div>
   </div>
 </header>
+
+<%= render 'businesses/modal_create-business' %>
+<%= render 'schedules/modal_create-schedule' %>
