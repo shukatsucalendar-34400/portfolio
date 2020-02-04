@@ -14,7 +14,7 @@ gem 'jquery-rails',            '4.3.1'
 gem 'turbolinks',              '5.0.1'
 gem 'jbuilder',                '2.7.0'
 gem 'bootstrap-will_paginate', '1.0.0'
-gem 'bootstrap-sass',          '3.3.7'
+gem 'bootstrap-sass',          '3.4.1'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
@@ -41,5 +41,5 @@ group :production do
   gem 'fog-aws' 
 end
 
-# WindowsŠÂ‹«‚Å‚Ítzinfo-data‚Æ‚¢‚¤gem‚ğŠÜ‚ß‚é•K—v‚ª‚ ‚è‚Ü‚·
+# Windowsç’°å¢ƒã§ã¯tzinfo-dataã¨ã„ã†gemã‚’å«ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
