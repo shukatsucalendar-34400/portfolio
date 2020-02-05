@@ -82,7 +82,7 @@
 ## アプリの解説
 ### アプリ情報
 URL: <https://floating-mountain-10800.herokuapp.com/>  
-必要であれば、以下のサンプルユーザーをご利用ください。(E-mailはの_at_は@で置き換えてください)  
+必要であれば、以下のサンプルユーザーをご利用ください。(E-mailの_at_は@で置き換えてください)  
 E-mail: example_at_example.com  
 password: password
 
