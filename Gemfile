@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails',                   '5.1.6'
 gem 'bcrypt',                  '3.1.13'
 gem 'faker',                   '1.9.1'
-gem 'carrierwave',             '1.2.2'
+gem 'carrierwave',             '1.3.2'
 gem 'mini_magick',             '4.10.1'
 gem 'will_paginate',           '3.1.6'
 gem 'puma',                    '3.9.1'
@@ -41,5 +41,5 @@ group :production do
   gem 'fog-aws' 
 end
 
-# WindowsŠÂ‹«‚Å‚Ítzinfo-data‚Æ‚¢‚¤gem‚ğŠÜ‚ß‚é•K—v‚ª‚ ‚è‚Ü‚·
+# Windowsç’°å¢ƒã§ã¯tzinfo-dataã¨ã„ã†gemã‚’å«ã‚ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
